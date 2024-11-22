@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@keyframes borderGlow {
+  0% {
+    border-color: white;
+    box-shadow: 0 0 5px white, 0 0 15px white;
+  }
+  50% {
+    border-color: transparent;
+    box-shadow: 0 0 5px transparent, 0 0 15px transparent;
+  }
+  100% {
+    border-color: white;
+    box-shadow: 0 0 5px white, 0 0 15px white;
+  }
+}
+
+.card-border-flow {
+  animation: borderGlow 2s infinite alternate;
+}
