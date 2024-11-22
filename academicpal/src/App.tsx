@@ -1,6 +1,6 @@
 import useFirebaseAuth from "./hooks/useFirebaseAuth";
 import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
+
 import AdminPanel from "./components/AdminPanel";
 import { FaGoogle, FaUpload, FaLock, FaEye, FaGithub, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -15,7 +15,30 @@ const App = () => {
     <div className="min-h-screen bg-black text-white">
       {/* Header with Logo */}
      {/* Add the Navbar */}
-     <Navbar  />
+     <header className="flex justify-between items-center p-6 bg-black shadow-lg">
+        <img src={Logo} alt="Logo" className="h-12" />
+
+        {/* Sign In / Sign Out Button */}
+        <div className="space-x-4">
+          {user ? (
+            <button
+              onClick={signOutUser}
+              className="px-6 py-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all"
+            >
+              Sign Out
+            </button>
+          ) : (
+            <button
+              onClick={signInWithGoogle}
+               className="px-6 py-3 bg-white text-black rounded-full hover:bg-gray-200 hover:text-black transition-all"
+            >
+              <FaGoogle className="inline-block mr-2" />
+              Sign In with Google
+            </button>
+          )}
+        </div>
+      </header>
+
 
       {/* Main Content */}
       <main className="mt-8 px-4">
