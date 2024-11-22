@@ -1,12 +1,11 @@
-import useFirebaseAuth from "./hooks/useFirebaseAuth";
-import Home from "./pages/Home";
-
-import AdminPanel from "./components/AdminPanel";
+import React from "react";
 import { FaGoogle, FaUpload, FaLock, FaEye, FaGithub, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
 import Logo from "./assets/academicpal.jpg"; // Import your logo (replace with actual path)
 import { motion } from "framer-motion"; // Import Framer Motion for smooth animations
+import useFirebaseAuth from "./hooks/useFirebaseAuth";
+import Home from "./pages/Home";
+import AdminPanel from "./components/AdminPanel";
 
 const App = () => {
   const { user, signInWithGoogle, signOutUser } = useFirebaseAuth();
@@ -14,23 +13,31 @@ const App = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header with Logo */}
-     {/* Add the Navbar */}
-     <header className="flex justify-between items-center p-6 bg-black shadow-lg">
+      <header className="flex justify-between items-center p-6 bg-black shadow-lg">
         <img src={Logo} alt="Logo" className="h-12" />
 
         {/* Sign In / Sign Out Button */}
         <div className="space-x-4">
           {user ? (
-            <button
-              onClick={signOutUser}
-              className="px-6 py-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all"
-            >
-              Sign Out
-            </button>
+            <div className="flex items-center space-x-4">
+              {/* Profile photo and name */}
+              <img
+                src={user.photoURL}
+                alt="Profile"
+                className="w-10 h-10 rounded-full"
+              />
+              <span className="text-white">{user.displayName}</span>
+              <button
+                onClick={signOutUser}
+                className="px-6 py-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all"
+              >
+                Sign Out
+              </button>
+            </div>
           ) : (
             <button
               onClick={signInWithGoogle}
-               className="px-6 py-3 bg-white text-black rounded-full hover:bg-gray-200 hover:text-black transition-all"
+              className="px-6 py-3 bg-white text-black rounded-full hover:bg-gray-200 hover:text-black transition-all"
             >
               <FaGoogle className="inline-block mr-2" />
               Sign In with Google
@@ -39,57 +46,50 @@ const App = () => {
         </div>
       </header>
 
-
       {/* Main Content */}
       <main className="mt-8 px-4">
         {/* Feature Cards */}
         <section>
           <h2 className="text-2xl font-semibold text-gray-300 mb-8">Features</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div
+              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex items-center mb-4">
+                <FaLock className="text-white text-4xl mr-4" />
+                <h3 className="text-xl font-semibold text-white">How to Use This Website</h3>
+              </div>
+              <p className="text-gray-200">
+                This website allows users to upload and manage educational resources. You can easily share your valuable content, access public resources, and sign in securely using your Google account.
+              </p>
+              <ul className="list-disc pl-6 mt-4 text-gray-300">
+                <li>Create an account or sign in with Google to access exclusive features.</li>
+                <li>Upload educational resources and manage them in your profile.</li>
+                <li>Share resources with others for public access.</li>
+                <li>Ensure your content is secure with the platform's authentication process.</li>
+              </ul>
+            </motion.div>
 
+            <motion.div
+              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex items-center mb-4">
+                <FaUpload className="text-white text-4xl mr-4" />
+                <h3 className="text-xl font-semibold text-white">How It Helps Other Students</h3>
+              </div>
+              <p className="text-gray-200">
+                When one student uploads valuable resources, it benefits the entire student community. Shared resources allow peers to access materials they may not have, providing equal opportunities for learning and success.
+              </p>
+              <ul className="list-disc pl-6 mt-4 text-gray-300">
+                <li>Students can share textbooks, notes, research papers, and more, helping others study efficiently.</li>
+                <li>Resources are made available to all, ensuring that no student is left behind due to lack of materials.</li>
+                <li>Collaborating through shared resources fosters a community of learning and mutual support among peers.</li>
+                <li>It provides easy access to crucial educational content, which can be referenced anytime by students in need.</li>
+              </ul>
+            </motion.div>
 
-          <motion.div
-  className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
-  whileHover={{ scale: 1.05 }}
->
-  <div className="flex items-center mb-4">
-    <FaLock className="text-white text-4xl mr-4" />
-    <h3 className="text-xl font-semibold text-white">How to Use This Website</h3>
-  </div>
-  <p className="text-gray-200">
-    This website allows users to upload and manage educational resources. 
-    You can easily share your valuable content, access public resources, and sign in securely using your Google account.
-  </p>
-  <ul className="list-disc pl-6 mt-4 text-gray-300">
-    <li>Create an account or sign in with Google to access exclusive features.</li>
-    <li>Upload educational resources and manage them in your profile.</li>
-    <li>Share resources with others for public access.</li>
-    <li>Ensure your content is secure with the platform's authentication process.</li>
-  </ul>
-</motion.div>
-
-<motion.div
-  className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
-  whileHover={{ scale: 1.05 }}
->
-  <div className="flex items-center mb-4">
-    <FaUpload className="text-white text-4xl mr-4" />
-    <h3 className="text-xl font-semibold text-white">How It Helps Other Students</h3>
-  </div>
-  <p className="text-gray-200">
-    When one student uploads valuable resources, it benefits the entire student community. 
-    Shared resources allow peers to access materials they may not have, providing equal opportunities for learning and success.
-  </p>
-  <ul className="list-disc pl-6 mt-4 text-gray-300">
-    <li>Students can share textbooks, notes, research papers, and more, helping others study efficiently.</li>
-    <li>Resources are made available to all, ensuring that no student is left behind due to lack of materials.</li>
-    <li>Collaborating through shared resources fosters a community of learning and mutual support among peers.</li>
-    <li>It provides easy access to crucial educational content, which can be referenced anytime by students in need.</li>
-  </ul>
-</motion.div>
-
-
-            {/* Card 1 */}
             <motion.div
               className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
               whileHover={{ scale: 1.05 }}
@@ -103,7 +103,6 @@ const App = () => {
               </p>
             </motion.div>
 
-            {/* Card 2 */}
             <motion.div
               className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
               whileHover={{ scale: 1.05 }}
@@ -117,7 +116,6 @@ const App = () => {
               </p>
             </motion.div>
 
-            {/* Card 3 */}
             <motion.div
               className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
               whileHover={{ scale: 1.05 }}
@@ -130,10 +128,6 @@ const App = () => {
                 Share resources publicly with others, ensuring easy access to important educational material.
               </p>
             </motion.div>
-
-
-
-            
           </div>
         </section>
 
