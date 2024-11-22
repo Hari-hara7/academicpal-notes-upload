@@ -1,14 +1,16 @@
-import React from "react";
-import { FaGoogle, FaUpload, FaLock, FaEye, FaGithub, FaLinkedin } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import Logo from "./assets/academicpal.jpg"; // Import your logo (replace with actual path)
-import { motion } from "framer-motion"; // Import Framer Motion for smooth animations
+import React, { useRef } from "react";
+import { FaGoogle, FaUpload, FaLock, FaEye, FaGithub, FaLinkedin, FaHandshake } from "react-icons/fa";
+import { motion } from "framer-motion";
+import Logo from "./assets/academicpal.jpg"; // Import your logo (replace with the actual path)
 import useFirebaseAuth from "./hooks/useFirebaseAuth";
 import Home from "./pages/Home";
 import AdminPanel from "./components/AdminPanel";
 
 const App = () => {
   const { user, signInWithGoogle, signOutUser } = useFirebaseAuth();
+ 
+
+
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -45,6 +47,28 @@ const App = () => {
           )}
         </div>
       </header>
+
+{/* Welcome Message Section */}
+{user && (
+  <section className="text-center py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 bg-black">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
+      Welcome, {user.displayName}! 
+      {/* Animated Handshake Icon */}
+      <motion.div
+        className="inline-block ml-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
+        whileHover={{ scale: 1.2, rotate: 15, color: "#ff00ff" }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        <FaHandshake />
+      </motion.div>
+    </h1>
+    <p className="text-md sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-300 mt-4 px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16">
+      Let’s get started! Upload your resources to help others.
+    </p>
+  </section>
+)}
+   
+      
 
       {/* Main Content */}
       <main className="mt-8 px-4">
