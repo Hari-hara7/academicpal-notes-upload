@@ -179,7 +179,7 @@ const App = () => {
 
           <div className="flex justify-center space-x-6 mb-4">
             <a
-              href="https://github.com/harianth"
+              href="https://github.com/Hari-hara7"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-300 transition duration-300"
@@ -187,7 +187,7 @@ const App = () => {
               <FaGithub className="text-3xl sm:text-4xl" />
             </a>
             <a
-              href="https://www.linkedin.com/in/harianth"
+              href="https://www.linkedin.com/in/hari-hara-nath-a13583282/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-300 transition duration-300"
