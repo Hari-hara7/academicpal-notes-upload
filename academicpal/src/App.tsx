@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { FaGoogle, FaUpload, FaLock, FaEye, FaGithub, FaLinkedin, FaHandshake } from "react-icons/fa";
 import { motion } from "framer-motion";
-import Logo from "./assets/academicpal.jpg"; // Import your logo (replace with the actual path)
+import Logo from "./assets/academicpal.jpg"; 
 import useFirebaseAuth from "./hooks/useFirebaseAuth";
 import Home from "./pages/Home";
 import AdminPanel from "./components/AdminPanel";
@@ -14,15 +14,15 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Header with Logo */}
+      
       <header className="flex justify-between items-center p-6 bg-black shadow-lg">
         <img src={Logo} alt="Logo" className="h-12" />
 
-        {/* Sign In / Sign Out Button */}
+      
         <div className="space-x-4">
           {user ? (
             <div className="flex items-center space-x-4">
-              {/* Profile photo and name */}
+          
               <img
                 src={user.photoURL}
                 alt="Profile"
@@ -48,12 +48,12 @@ const App = () => {
         </div>
       </header>
 
-{/* Welcome Message Section */}
+
 {user && (
   <section className="text-center py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 bg-black">
     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
       Welcome, {user.displayName}! 
-      {/* Animated Handshake Icon */}
+      
       <motion.div
         className="inline-block ml-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
         whileHover={{ scale: 1.2, rotate: 15, color: "#ff00ff" }}
@@ -70,9 +70,9 @@ const App = () => {
    
       
 
-      {/* Main Content */}
+   
       <main className="mt-8 px-4">
-        {/* Feature Cards */}
+       
         <section>
           <h2 className="text-2xl font-semibold text-gray-300 mb-8">Features</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -155,14 +155,14 @@ const App = () => {
           </div>
         </section>
 
-        {/* Display Admin Panel if the user is authenticated with @nmamit.in email */}
+        
         {user && user.email.endsWith("@nmamit.in") && <AdminPanel user={user} />}
 
-        {/* Display Home page content */}
+        
         <Home />
       </main>
 
-      {/* Footer */}
+      
       <footer className="bg-black text-center text-gray-400 py-8">
         <div className="container mx-auto px-4">
           <p className="mb-4 text-sm sm:text-base">
