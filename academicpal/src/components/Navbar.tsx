@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaGoogle, FaTimes, FaBars } from "react-icons/fa";
-import useFirebaseAuth from "../hooks/useFirebaseAuth"; // Assuming you have this hook set up
-import Logo from "../assets/academicpal.jpg"; // Replace with your actual logo
+import useFirebaseAuth from "../hooks/useFirebaseAuth"; 
+import Logo from "../assets/academicpal.jpg"; 
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,11 +13,11 @@ const Navbar = () => {
 
   return (
     <header className="bg-black text-white">
-      {/* Navbar Top */}
+    
       <div className="flex justify-between items-center p-6 shadow-lg">
         <img src={Logo} alt="Logo" className="h-12" />
 
-        {/* Desktop Sign In / Sign Out Button */}
+       
         <div className="hidden lg:flex space-x-4">
           {user ? (
             <button
@@ -37,7 +37,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+       
         <button
           onClick={toggleMenu}
           className="lg:hidden"
@@ -47,7 +47,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Side Menu */}
+    
       <div
         className={`fixed top-0 left-0 w-64 h-full bg-black text-white p-6 transition-transform transform ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
@@ -63,7 +63,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Menu Links */}
+        
         <nav>
           <ul className="space-y-6">
             <li>
@@ -79,7 +79,7 @@ const Navbar = () => {
           </ul>
         </nav>
 
-        {/* Sign In / Sign Out Button inside Menu */}
+       
         <div className="mt-8">
           {user ? (
             <button
@@ -100,7 +100,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Desktop Menu */}
+      
       <div className="hidden lg:flex justify-center space-x-6 mt-6">
         <a href="/resources" className="text-xl text-white hover:text-gray-400">
           Resources
