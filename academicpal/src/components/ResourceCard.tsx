@@ -1,6 +1,6 @@
 import { Resource } from "../types/resource";
-import { FaLink, FaFileAlt, FaUser, FaExternalLinkAlt } from "react-icons/fa"; // Icons for link, file, user, external link
-import { motion } from "framer-motion"; // Import Framer Motion for animation
+import { FaLink, FaFileAlt, FaUser, FaExternalLinkAlt } from "react-icons/fa"; 
+import { motion } from "framer-motion"; 
 
 interface Props {
   resource: Resource;
@@ -12,10 +12,10 @@ const ResourceCard = ({ resource }: Props) => {
       className="p-6 border-2 border-gray-700 rounded-lg shadow-lg bg-gray-800 hover:scale-105 transition-all duration-300 ease-in-out"
       whileHover={{ scale: 1.05 }}
     >
-      {/* Card Content */}
+      
       <div className="mb-4">
         <div className="flex items-center mb-3">
-          {/* Resource Type Icon */}
+         
           <div className="mr-3">
             {resource.resourceType === "link" ? (
               <FaLink className="text-cyan-400 text-3xl" />
@@ -37,7 +37,7 @@ const ResourceCard = ({ resource }: Props) => {
           </div>
         </div>
 
-        {/* Visit Resource Link */}
+       
         <a
           href={resource.resourceUrl}
           target="_blank"
