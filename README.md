@@ -36,5 +36,5 @@ This project utilizes **Firebase Authentication** 🔐 for secure logins and **F
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/your-repository-name.git
+   git clone https://github.com/Hari-hara7/academicpal-notes-upload.git
    cd your-repository-name
