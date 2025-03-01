@@ -69,7 +69,7 @@ const App = () => {
 )}
    
       
-
+   {user && user.email.endsWith("@nmamit.in") && <AdminPanel user={user} />}
    
       <main className="mt-8 px-4">
        
@@ -156,7 +156,7 @@ const App = () => {
         </section>
 
         
-        {user && user.email.endsWith("@nmamit.in") && <AdminPanel user={user} />}
+       
 
         
         <Home />
