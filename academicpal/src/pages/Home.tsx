@@ -35,15 +35,12 @@ const HomePage = () => {
   useEffect(() => {
     let filtered = resources;
 
-    console.log("Selected Filters:", { year, semester, branch, subject });
-
     if (year) filtered = filtered.filter((res) => res.year === year);
     if (semester) filtered = filtered.filter((res) => res.semester.toString() === semester);
     if (branch) {
       filtered = filtered.filter((res) => {
         const dbBranch = res.branch?.trim().toLowerCase();
         const selectedBranch = branch.trim().toLowerCase();
-        console.log(`Checking Branch: DB Value = "${dbBranch}", Selected = "${selectedBranch}"`);
         return dbBranch === selectedBranch;
       });
     }
@@ -54,25 +51,24 @@ const HomePage = () => {
         return dbSubject.includes(searchSubject);
       });
     }
-    console.log("Filtered Resources:", filtered);
     setFilteredResources(filtered);
   }, [year, semester, branch, subject, resources]);
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-5xl font-extrabold text-center text-cyan-400 mb-10">
+    <div className="container mx-auto px-4 py-6">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-cyan-400 mb-6">
         📚 Explore Resources
       </h1>
 
-      {/* Filters */}
-      <div className="flex flex-wrap gap-4 justify-center bg-opacity-80 bg-gray-900 p-6 rounded-xl shadow-lg backdrop-blur-md border border-gray-700 mb-10">
+      {/* Filters - Mobile Optimized */}
+      <div className="flex flex-wrap md:flex-row flex-col gap-4 justify-center bg-opacity-80 bg-gray-900 p-6 rounded-xl shadow-lg backdrop-blur-md border border-gray-700 mb-10 overflow-x-auto whitespace-nowrap">
         {/* Year Selection */}
-        <div className="relative flex items-center">
+        <div className="relative flex items-center w-full md:w-auto">
           <GraduationCap className="absolute left-3 text-gray-400" size={20} />
           <select
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className="pl-10 pr-4 py-2 border rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-cyan-400"
+            className="w-full md:w-auto pl-10 pr-4 py-2 border rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-cyan-400"
           >
             <option value="">Year</option>
             <option value="1st">1st Year</option>
@@ -83,12 +79,12 @@ const HomePage = () => {
         </div>
 
         {/* Semester Selection */}
-        <div className="relative flex items-center">
+        <div className="relative flex items-center w-full md:w-auto">
           <Calendar className="absolute left-3 text-gray-400" size={20} />
           <select
             value={semester}
             onChange={(e) => setSemester(e.target.value)}
-            className="pl-10 pr-4 py-2 border rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-cyan-400"
+            className="w-full md:w-auto pl-10 pr-4 py-2 border rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-cyan-400"
           >
             <option value="">Semester</option>
             {Array.from({ length: 8 }, (_, i) => (
@@ -98,12 +94,12 @@ const HomePage = () => {
         </div>
 
         {/* Branch Selection */}
-        <div className="relative flex items-center">
+        <div className="relative flex items-center w-full md:w-auto">
           <Filter className="absolute left-3 text-gray-400" size={20} />
           <select
             value={branch}
             onChange={(e) => setBranch(e.target.value)}
-            className="pl-10 pr-4 py-2 border rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-cyan-400"
+            className="w-full md:w-auto pl-10 pr-4 py-2 border rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-cyan-400"
           >
             <option value="">Branch</option>
             <option value="CSE">CSE</option>
@@ -123,20 +119,20 @@ const HomePage = () => {
         </div>
 
         {/* Subject Search */}
-        <div className="relative flex items-center">
+        <div className="relative flex items-center w-full md:w-auto">
           <Book className="absolute left-3 text-gray-400" size={20} />
           <input
             type="text"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             placeholder="Search Subject"
-            className="pl-10 pr-4 py-2 border rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-cyan-400"
+            className="w-full md:w-auto pl-10 pr-4 py-2 border rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-cyan-400"
           />
         </div>
       </div>
 
-      {/* Resource Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {/* Resource Cards - Responsive Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {filteredResources.length > 0 ? (
           filteredResources.map((resource) => (
             <ResourceCard key={resource.id} resource={resource} />
