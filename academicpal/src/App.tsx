@@ -1,60 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FaGoogle, FaUpload, FaLock, FaEye, FaGithub, FaLinkedin, FaHandshake } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Logo from "./assets/academicpal.jpg"; 
 import useFirebaseAuth from "./hooks/useFirebaseAuth";
 import Home from "./pages/Home";
 import AdminPanel from "./components/AdminPanel";
+
 const App = () => {
   const { user, signInWithGoogle, signOutUser } = useFirebaseAuth();
-  const features = [
-    {
-      icon: <FaLock className="text-white-400 text-5xl" />, 
-      title: "How to Use This Website",
-      description: "Upload and manage educational resources effortlessly. Share valuable content and sign in securely.",
-      list: [
-        "Create an account or sign in with Google.",
-        "Upload and manage educational resources.",
-        "Share resources for public access.",
-        "Ensure security with authentication."
-      ]
-    },
-    {
-      icon: <FaUpload className="text-white-400 text-5xl" />, 
-      title: "How It Helps Other Students",
-      description: "Shared resources ensure equal learning opportunities and enhance collaboration among students.",
-      list: [
-        "Share textbooks, notes, and research papers.",
-        "Ensure no student is left behind.",
-        "Foster a learning community.",
-        "Provide easy access to study materials."
-      ]
-    },
-    {
-      icon: <FaUpload className="text-white-400 text-5xl" />, 
-      title: "Resource Upload",
-      description: "Easily upload and manage study resources with simple tools."
-    },
-    {
-      icon: <FaLock className="text-white-400 text-5xl" />, 
-      title: "Secure Authentication",
-      description: "Sign in securely using Google authentication with email validation."
-    },
-    {
-      icon: <FaEye className="text-white-400 text-5xl" />, 
-      title: "Public Access",
-      description: "Share resources publicly to make learning materials accessible to everyone."
-    }
-  ];
+ 
+
+
 
   return (
     <div className="min-h-screen bg-black text-white">
+      
       <header className="flex justify-between items-center p-6 bg-black shadow-lg">
         <img src={Logo} alt="Logo" className="h-12" />
 
+      
         <div className="space-x-4">
           {user ? (
             <div className="flex items-center space-x-4">
+          
               <img
                 src={user.photoURL}
                 alt="Profile"
@@ -80,72 +48,158 @@ const App = () => {
         </div>
       </header>
 
-      {user && (
-        <section className="text-center py-12 bg-black">
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
-            Welcome, {user.displayName}! 
-            <motion.div
-              className="inline-block ml-2 text-4xl"
-              whileHover={{ scale: 1.2, rotate: 15, color: "#ff00ff" }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <FaHandshake />
-            </motion.div>
-          </h1>
-          <p className="text-lg text-gray-300 mt-4 px-6">
-            Let’s get started! Upload your resources to help others.
-          </p>
-        </section>
-      )}
-      
-      {user && user.email.endsWith("@nmamit.in") && <AdminPanel user={user} />}
 
-      {!user && (
-        <main className="mt-8 px-4">
-         <section>
-  <h2 className="text-4xl font-extrabold text-gray-100 mb-12 text-center tracking-wide">Features</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-    {features.map((feature, index) => (
+{user && (
+  <section className="text-center py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 bg-black">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
+      Welcome, {user.displayName}! 
+      
       <motion.div
-        key={index}
-        className="bg-gradient-to-br from-gray-800 to-dark-900 p-8 rounded-2xl border border-white/10 shadow-xl transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2"
-        whileHover={{ scale: 1.05 }}
+        className="inline-block ml-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
+        whileHover={{ scale: 1.2, rotate: 15, color: "#ff00ff" }}
+        transition={{ type: "spring", stiffness: 300 }}
       >
-        <div className="flex items-center mb-6">
-          {feature.icon}
-          <h3 className="text-2xl font-semibold text-white ml-4">{feature.title}</h3>
-        </div>
-        <p className="text-gray-300 leading-relaxed">{feature.description}</p>
-        {feature.list && (
-          <ul className="list-disc pl-6 mt-4 text-gray-400 space-y-2">
-            {feature.list.map((item, idx) => (
-              <li key={idx} className="hover:text-gray-200 transition-colors">{item}</li>
-            ))}
-          </ul>
-        )}
+        <FaHandshake />
       </motion.div>
-    ))}
-  </div>
-</section>
-
-        </main>
-      )}
+    </h1>
+    <p className="text-md sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-300 mt-4 px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16">
+      Let’s get started! Upload your resources to help others.
+    </p>
+  </section>
+)}
+   
       
-      <Home />
+   {user && user.email.endsWith("@nmamit.in") && <AdminPanel user={user} />}
+   
+      <main className="mt-8 px-4">
+       
+        <section>
+          <h2 className="text-2xl font-semibold text-gray-300 mb-8">Features</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div
+              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex items-center mb-4">
+                <FaLock className="text-white text-4xl mr-4" />
+                <h3 className="text-xl font-semibold text-white">How to Use This Website</h3>
+              </div>
+              <p className="text-gray-200">
+                This website allows users to upload and manage educational resources. You can easily share your valuable content, access public resources, and sign in securely using your Google account.
+              </p>
+              <ul className="list-disc pl-6 mt-4 text-gray-300">
+                <li>Create an account or sign in with Google to access exclusive features.</li>
+                <li>Upload educational resources and manage them in your profile.</li>
+                <li>Share resources with others for public access.</li>
+                <li>Ensure your content is secure with the platform's authentication process.</li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex items-center mb-4">
+                <FaUpload className="text-white text-4xl mr-4" />
+                <h3 className="text-xl font-semibold text-white">How It Helps Other Students</h3>
+              </div>
+              <p className="text-gray-200">
+                When one student uploads valuable resources, it benefits the entire student community. Shared resources allow peers to access materials they may not have, providing equal opportunities for learning and success.
+              </p>
+              <ul className="list-disc pl-6 mt-4 text-gray-300">
+                <li>Students can share textbooks, notes, research papers, and more, helping others study efficiently.</li>
+                <li>Resources are made available to all, ensuring that no student is left behind due to lack of materials.</li>
+                <li>Collaborating through shared resources fosters a community of learning and mutual support among peers.</li>
+                <li>It provides easy access to crucial educational content, which can be referenced anytime by students in need.</li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex items-center mb-4">
+                <FaUpload className="text-white text-4xl mr-4" />
+                <h3 className="text-xl font-semibold text-white">Resource Upload</h3>
+              </div>
+              <p className="text-gray-200">
+                Easily upload and manage your resources. Provide links to useful files or websites.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex items-center mb-4">
+                <FaLock className="text-white text-4xl mr-4" />
+                <h3 className="text-xl font-semibold text-white">Secure Authentication</h3>
+              </div>
+              <p className="text-gray-200">
+                Sign in securely using your Google account with email validation for authorized users.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex items-center mb-4">
+                <FaEye className="text-white text-4xl mr-4" />
+                <h3 className="text-xl font-semibold text-white">Public Access</h3>
+              </div>
+              <p className="text-gray-200">
+                Share resources publicly with others, ensuring easy access to important educational material.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        
+       
+
+        
+        <Home />
+      </main>
+
       
       <footer className="bg-black text-center text-gray-400 py-8">
-        <p>
-          Designed by <a href="https://hariharanath.is-cod.in/" className="text-blue-500 hover:text-blue-700 font-semibold">Hari Haranath</a>
-        </p>
-        <div className="flex justify-center space-x-6">
-          <a href="https://github.com/Hari-hara7" className="text-gray-400 hover:text-gray-300">
-            <FaGithub className="text-3xl" />
-          </a>
-          <a href="https://www.linkedin.com/in/hari-hara-nath-a13583282/" className="text-gray-400 hover:text-gray-300">
-            <FaLinkedin className="text-3xl" />
-          </a>
+        <div className="container mx-auto px-4">
+          <p className="mb-4 text-sm sm:text-base">
+            Designed and Developed by{" "}
+            <a
+              href="https://hariharanath.is-cod.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:text-blue-700 font-semibold"
+            >
+              Hari Haranath
+            </a>
+          </p>
+
+          <div className="flex justify-center space-x-6 mb-4">
+            <a
+              href="https://github.com/Hari-hara7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-300 transition duration-300"
+            >
+              <FaGithub className="text-3xl sm:text-4xl" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/hari-hara-nath-a13583282/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-300 transition duration-300"
+            >
+              <FaLinkedin className="text-3xl sm:text-4xl" />
+            </a>
+          </div>
+
+          <p className="text-sm sm:text-base text-gray-500 mt-4">
+            &copy; {new Date().getFullYear()} All rights reserved.
+          </p>
         </div>
-        <p className="text-sm text-gray-500 mt-4">&copy; {new Date().getFullYear()} All rights reserved.</p>
       </footer>
     </div>
   );
