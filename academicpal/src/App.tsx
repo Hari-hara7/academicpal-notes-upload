@@ -5,9 +5,11 @@ import Logo from "./assets/academicpal.jpg";
 import useFirebaseAuth from "./hooks/useFirebaseAuth";
 import Home from "./pages/Home";
 import AdminPanel from "./components/AdminPanel";
+import SignInPage from "./components/SignInPage";
 
 const App = () => {
   const { user, signInWithGoogle, signOutUser } = useFirebaseAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
  
 
 
@@ -15,38 +17,80 @@ const App = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       
-      <header className="flex justify-between items-center p-6 bg-black shadow-lg">
-        <img src={Logo} alt="Logo" className="h-12" />
+      <header className="flex justify-between items-center p-4 md:p-6 bg-black shadow-lg">
+  {/* Logo */}
+  <img src={Logo} alt="Logo" className="h-10 md:h-12" />
 
-      
-        <div className="space-x-4">
-          {user ? (
-            <div className="flex items-center space-x-4">
-          
-              <img
-                src={user.photoURL}
-                alt="Profile"
-                className="w-10 h-10 rounded-full"
-              />
-              <span className="text-white">{user.displayName}</span>
-              <button
-                onClick={signOutUser}
-                className="px-6 py-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all"
-              >
-                Sign Out
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={signInWithGoogle}
-              className="px-6 py-3 bg-white text-black rounded-full hover:bg-gray-200 hover:text-black transition-all"
-            >
-              <FaGoogle className="inline-block mr-2" />
-              Sign In with Google
-            </button>
-          )}
-        </div>
-      </header>
+  {/* Desktop & Mobile Menu */}
+  <div className="hidden sm:flex space-x-4 items-center">
+    {user ? (
+      <div className="flex items-center space-x-4">
+        <img
+          src={user.photoURL}
+          alt="Profile"
+          className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-gray-400"
+        />
+        <span className="text-white text-sm md:text-base">{user.displayName}</span>
+        <button
+          onClick={signOutUser}
+          className="px-5 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all"
+        >
+          Sign Out
+        </button>
+      </div>
+    ) : (
+      <button
+        onClick={signInWithGoogle}
+        className="px-5 py-2 bg-white text-black rounded-full hover:bg-gray-200 transition-all"
+      >
+        <FaGoogle className="inline-block mr-2" />
+        Sign In
+      </button>
+    )}
+  </div>
+
+  {/* Mobile Menu (Hamburger Icon) */}
+  <div className="sm:hidden">
+    <button
+      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      className="text-white text-2xl"
+    >
+      ☰
+    </button>
+  </div>
+
+  {/* Mobile Dropdown */}
+  {mobileMenuOpen && (
+    <div className="absolute top-16 right-4 bg-black text-white w-48 rounded-lg shadow-lg p-4 sm:hidden">
+      {user ? (
+        <>
+          <div className="flex items-center space-x-3 mb-4">
+            <img
+              src={user.photoURL}
+              alt="Profile"
+              className="w-8 h-8 rounded-full border border-gray-400"
+            />
+            <span className="text-sm">{user.displayName}</span>
+          </div>
+          <button
+            onClick={signOutUser}
+            className="w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all"
+          >
+            Sign Out
+          </button>
+        </>
+      ) : (
+        <button
+          onClick={signInWithGoogle}
+          className="w-full py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition-all"
+        >
+          <FaGoogle className="inline-block mr-2" />
+          Sign In
+        </button>
+      )}
+    </div>
+  )}
+</header>
 
 
 {user && (
@@ -73,87 +117,56 @@ const App = () => {
    
       <main className="mt-8 px-4">
        
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-300 mb-8">Features</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <motion.div
-              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="flex items-center mb-4">
-                <FaLock className="text-white text-4xl mr-4" />
-                <h3 className="text-xl font-semibold text-white">How to Use This Website</h3>
-              </div>
-              <p className="text-gray-200">
-                This website allows users to upload and manage educational resources. You can easily share your valuable content, access public resources, and sign in securely using your Google account.
-              </p>
-              <ul className="list-disc pl-6 mt-4 text-gray-300">
-                <li>Create an account or sign in with Google to access exclusive features.</li>
-                <li>Upload educational resources and manage them in your profile.</li>
-                <li>Share resources with others for public access.</li>
-                <li>Ensure your content is secure with the platform's authentication process.</li>
-              </ul>
-            </motion.div>
+      {!user && (
+  <section className="py-12">
+    <h2 className="text-3xl font-bold text-gray-200 mb-10 text-center">Features</h2>
+    
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
+      
+      <motion.div
+        className="bg-dark backdrop-blur-lg p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20"
+        whileHover={{ y: -5 }}
+      >
+        <div className="flex items-center mb-4">
+          <FaLock className="text-blue-400 text-4xl mr-4" />
+          <h3 className="text-xl font-semibold text-white">How to Use This Website</h3>
+        </div>
+        <p className="text-gray-300">
+          Easily upload and manage educational resources, share valuable content, and securely sign in using your Google account.
+        </p>
+      </motion.div>
 
-            <motion.div
-              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="flex items-center mb-4">
-                <FaUpload className="text-white text-4xl mr-4" />
-                <h3 className="text-xl font-semibold text-white">How It Helps Other Students</h3>
-              </div>
-              <p className="text-gray-200">
-                When one student uploads valuable resources, it benefits the entire student community. Shared resources allow peers to access materials they may not have, providing equal opportunities for learning and success.
-              </p>
-              <ul className="list-disc pl-6 mt-4 text-gray-300">
-                <li>Students can share textbooks, notes, research papers, and more, helping others study efficiently.</li>
-                <li>Resources are made available to all, ensuring that no student is left behind due to lack of materials.</li>
-                <li>Collaborating through shared resources fosters a community of learning and mutual support among peers.</li>
-                <li>It provides easy access to crucial educational content, which can be referenced anytime by students in need.</li>
-              </ul>
-            </motion.div>
+      <motion.div
+        className="bg-dark backdrop-blur-lg p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20"
+        whileHover={{ y: -5 }}
+      >
+        <div className="flex items-center mb-4">
+          <FaUpload className="text-green-400 text-4xl mr-4" />
+          <h3 className="text-xl font-semibold text-white">How It Helps Other Students</h3>
+        </div>
+        <p className="text-gray-300">
+          Shared resources benefit the student community by making valuable materials accessible to everyone.
+        </p>
+      </motion.div>
 
-            <motion.div
-              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="flex items-center mb-4">
-                <FaUpload className="text-white text-4xl mr-4" />
-                <h3 className="text-xl font-semibold text-white">Resource Upload</h3>
-              </div>
-              <p className="text-gray-200">
-                Easily upload and manage your resources. Provide links to useful files or websites.
-              </p>
-            </motion.div>
+      <motion.div
+        className="bg-dark backdrop-blur-lg p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20"
+        whileHover={{ y: -5 }}
+      >
+        <div className="flex items-center mb-4">
+          <FaEye className="text-yellow-400 text-4xl mr-4" />
+          <h3 className="text-xl font-semibold text-white">Public Access</h3>
+        </div>
+        <p className="text-gray-300">
+          Share resources publicly and ensure everyone has access to crucial educational content.
+        </p>
+      </motion.div>
+      
+    </div>
+  </section>
+)}
 
-            <motion.div
-              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="flex items-center mb-4">
-                <FaLock className="text-white text-4xl mr-4" />
-                <h3 className="text-xl font-semibold text-white">Secure Authentication</h3>
-              </div>
-              <p className="text-gray-200">
-                Sign in securely using your Google account with email validation for authorized users.
-              </p>
-            </motion.div>
 
-            <motion.div
-              className="bg-transparent p-6 rounded-xl shadow-lg transform hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-in-out border-2 border-gray-700 card-border-flow"
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="flex items-center mb-4">
-                <FaEye className="text-white text-4xl mr-4" />
-                <h3 className="text-xl font-semibold text-white">Public Access</h3>
-              </div>
-              <p className="text-gray-200">
-                Share resources publicly with others, ensuring easy access to important educational material.
-              </p>
-            </motion.div>
-          </div>
-        </section>
 
         
        
