@@ -186,7 +186,7 @@ const App = () => {
               rel="noopener noreferrer"
               className="text-blue-500 hover:text-blue-700 font-semibold"
             >
-              Hari Haranath
+              HariHaranath
             </a>
           </p>
 
