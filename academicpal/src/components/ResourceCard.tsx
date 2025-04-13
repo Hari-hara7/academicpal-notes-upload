@@ -53,15 +53,7 @@ const ResourceCard = ({ resource }: Props) => {
 
       {/* Action Buttons */}
       <div className="mt-4 space-y-2">
-        <a
-          href={resource.resourceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-cyan-500/30 backdrop-blur-xl text-white font-semibold transition-all border border-cyan-300/50 shadow-lg hover:bg-cyan-500/50 hover:shadow-xl"
-        >
-          <FaExternalLinkAlt /> Visit Resource
-        </a>
-
+      
         {resource.shareableLink && (
           <a
             href={resource.shareableLink}
